@@ -41,3 +41,28 @@ window.addEventListener("scroll", () => {
     alterStyles(isBackToTopRendered);
   }
 });
+
+// --- Public Speaking Year Filter ---
+const filterButtons = document.querySelectorAll('.filter-btn');
+const talkCards = document.querySelectorAll('.talk-card');
+
+filterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    // Remove active class from all buttons
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    // Add active class to current button
+    button.classList.add('active');
+
+    const filterValue = button.getAttribute('data-filter');
+
+    talkCards.forEach(card => {
+      const cardYear = card.getAttribute('data-year');
+      if (filterValue === 'all' || cardYear === filterValue) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+
